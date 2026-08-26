@@ -8,54 +8,119 @@ import "./styles/Navbar.css";
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 export let smoother: ScrollSmoother;
 
-const Navbar = () => {
+interface NavbarProps {
+  currentView?: "home" | "academics";
+  onNavigate?: (view: "home" | "academics", section?: string) => void;
+}
+
+const Navbar = ({ currentView = "home", onNavigate }: NavbarProps) => {
   useEffect(() => {
-    smoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1.7,
-      speed: 1.7,
-      effects: true,
-      autoResize: true,
-      ignoreMobileResize: true,
-    });
+    if (!smoother) {
+      smoother = ScrollSmoother.create({
+        wrapper: "#smooth-wrapper",
+        content: "#smooth-content",
+        smooth: 1.1,
+        effects: true,
+        autoResize: true,
+        ignoreMobileResize: true,
+      });
+    }
 
-    smoother.scrollTop(0);
-    smoother.paused(true);
+    document.body.style.overflowY = "auto";
 
+    const resizeHandler = () => {
+      ScrollSmoother.refresh(true);
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("resize", resizeHandler);
+    return () => {
+      window.removeEventListener("resize", resizeHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflowY = "auto";
+    if (smoother) {
+      smoother.paused(false);
+      smoother.scrollTop(0);
+      ScrollSmoother.refresh(true);
+      ScrollTrigger.refresh();
+    }
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  }, [currentView]);
+
+  useEffect(() => {
     let links = document.querySelectorAll(".header ul a");
+    const cleanupFns: (() => void)[] = [];
+
     links.forEach((elem) => {
       let element = elem as HTMLAnchorElement;
-      element.addEventListener("click", (e) => {
-        if (window.innerWidth > 1024) {
+      const handleClick = (e: MouseEvent) => {
+        const section = element.getAttribute("data-href");
+        if (section === "#academics") {
           e.preventDefault();
-          let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
+          if (onNavigate) {
+            onNavigate("academics");
+          } else {
+            window.location.hash = "academics";
+          }
+          return;
+        }
+
+        if (currentView === "academics" && onNavigate) {
+          e.preventDefault();
+          onNavigate("home", section || undefined);
+          return;
+        }
+
+        if (window.innerWidth > 1024 && section && smoother) {
+          e.preventDefault();
+          smoother.paused(false);
           smoother.scrollTo(section, true, "top top");
         }
-      });
+      };
+
+      element.addEventListener("click", handleClick);
+      cleanupFns.push(() => element.removeEventListener("click", handleClick));
     });
-    window.addEventListener("resize", () => {
-      ScrollSmoother.refresh(true);
-    });
-  }, []);
+
+    return () => {
+      cleanupFns.forEach((fn) => fn());
+    };
+  }, [currentView, onNavigate]);
   return (
     <>
       <div className="header">
-        <a href="/#" className="navbar-title" data-cursor="disable">
-          Logo
+        <a
+          href="/#"
+          className="navbar-title"
+          data-cursor="disable"
+          onClick={(e) => {
+            if (currentView === "academics" && onNavigate) {
+              e.preventDefault();
+              onNavigate("home");
+            }
+          }}
+        >
+          SAMARTH
         </a>
         <a
-          href="mailto:example@mail.com"
+          href="mailto:samarth.prasad62@gmail.com"
           className="navbar-connect"
           data-cursor="disable"
         >
-          example@mail.com
+          samarth.prasad62@gmail.com
         </a>
         <ul>
           <li>
             <a data-href="#about" href="#about">
               <HoverLinks text="ABOUT" />
+            </a>
+          </li>
+          <li>
+            <a data-href="#academics" href="#academics">
+              <HoverLinks text="ACADEMICS" />
             </a>
           </li>
           <li>

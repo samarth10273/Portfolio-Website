@@ -87,24 +87,24 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>DEVELOP</h3>
+              <h3>AI & TECH</h3>
               <h4>Description</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae.
+                Hands-on engineering across AI models, computer vision,
+                Raspberry Pi, embedded microcontrollers, and modern software.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
+                <div className="what-tags">Python</div>
+                <div className="what-tags">Generative AI</div>
+                <div className="what-tags">Computer Vision</div>
+                <div className="what-tags">OpenCV</div>
+                <div className="what-tags">Raspberry Pi</div>
+                <div className="what-tags">Arduino / ESP32</div>
                 <div className="what-tags">JavaScript</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">Three.js</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Css</div>
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">Express.js</div>
-                <div className="what-tags">PHP</div>
-                <div className="what-tags">MySql</div>
+                <div className="what-tags">React / Next.js</div>
+                <div className="what-tags">IoT Sensors</div>
+                <div className="what-tags">WebRTC & APIs</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -128,22 +128,22 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>DESIGN</h3>
+              <h3>DESIGN & MEDIA</h3>
               <h4>Description</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae
+                Crafting digital creatives, high-CTR thumbnails, video editing,
+                and motion graphics for social creators and presentations.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Blender</div>
-                <div className="what-tags">Zbrush</div>
-                <div className="what-tags">UI Design</div>
-                <div className="what-tags">Motion</div>
-                <div className="what-tags">Rigging</div>
-                <div className="what-tags">3D Animation</div>
-                <div className="what-tags">Character Design</div>
-                <div className="what-tags">Modelling</div>
+                <div className="what-tags">Graphic Design</div>
+                <div className="what-tags">Video Editing</div>
+                <div className="what-tags">CapCut</div>
+                <div className="what-tags">Adobe After Effects</div>
+                <div className="what-tags">Canva</div>
+                <div className="what-tags">Motion Design</div>
+                <div className="what-tags">Social Creatives</div>
+                <div className="what-tags">Music & Guitar</div>
               </div>
               <div className="what-arrow"></div>
             </div>

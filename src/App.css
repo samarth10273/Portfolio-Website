@@ -1,5 +1,8 @@
 .section-container {
-  width: 1300px;
+  width: var(--cWidth);
+  max-width: 1400px;
+  margin: auto;
+  box-sizing: border-box;
 }
 .title,
 .para {
@@ -11,18 +14,19 @@
 }
 @media only screen and (max-width: 1600px) {
   .section-container {
-    width: 1200px;
-    max-width: calc(100% - 160px);
+    width: var(--cWidth);
+    max-width: 1300px;
   }
 }
 @media only screen and (max-width: 1400px) {
   .section-container {
-    width: 900px;
+    width: var(--cWidth);
+    max-width: 1150px;
   }
 }
 @media only screen and (max-width: 900px) {
   .section-container {
-    width: 500px;
-    max-width: var(--cWidth);
+    width: var(--cWidth);
+    max-width: 100%;
   }
 }
