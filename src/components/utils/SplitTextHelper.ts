@@ -39,8 +39,18 @@ export class SplitText {
       const origHtml = el.innerHTML;
       el.innerHTML = "";
 
-      // Split by <br> or <br/> tags to preserve line breaks
-      const lineParts = origHtml.split(/<br\s*\/?>/i);
+      // Normalize all block level wrappers and line breaks
+      const normalizedHtml = origHtml
+        .replace(/<br\s*\/?>/gi, "\n")
+        .replace(/<div[^>]*>/gi, "\n")
+        .replace(/<\/div>/gi, "\n")
+        .replace(/<p[^>]*>/gi, "\n")
+        .replace(/<\/p>/gi, "\n");
+
+      const lineParts = normalizedHtml
+        .split("\n")
+        .map((l) => l.trim())
+        .filter((l) => l.length > 0);
 
       lineParts.forEach((lineHtml) => {
         const lineWrapper = document.createElement("div");
@@ -53,7 +63,6 @@ export class SplitText {
         const text = temp.textContent || "";
 
         if (type.includes("chars")) {
-          // Split by whitespace
           const wordsArr = text.trim().split(/\s+/);
           wordsArr.forEach((w, wIdx) => {
             if (!w) return;
@@ -81,7 +90,6 @@ export class SplitText {
             }
           });
         } else {
-          // Words only
           const wordsArr = text.trim().split(/\s+/);
           wordsArr.forEach((w, wIdx) => {
             if (!w) return;
