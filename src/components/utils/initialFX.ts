@@ -76,11 +76,29 @@ export function initialFX() {
   var landingText4 = new SplitText(".landing-h2-1", TextProps);
   var landingText5 = new SplitText(".landing-h2-2", TextProps);
 
+  gsap.fromTo(
+    landingText4.chars,
+    { opacity: 0, y: 80, filter: "blur(5px)" },
+    {
+      opacity: 1,
+      duration: 1.2,
+      filter: "blur(0px)",
+      ease: "power3.inOut",
+      y: 0,
+      stagger: 0.025,
+      delay: 0.3,
+    }
+  );
+
+  gsap.set(landingText3.chars, { opacity: 0, y: 80 });
+  gsap.set(landingText5.chars, { opacity: 0, y: 80 });
+
   LoopText(landingText2, landingText3);
   LoopText(landingText4, landingText5);
 }
 
 function LoopText(Text1: SplitText, Text2: SplitText) {
+  gsap.set(Text2.chars, { opacity: 0, y: 80 });
   var tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
   const delay = 4;
   const delay2 = delay * 2 + 1;
