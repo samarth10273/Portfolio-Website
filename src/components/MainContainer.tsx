@@ -10,6 +10,7 @@ import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import Academics from "./Academics";
 import setSplitText from "./utils/splitText";
+import { ScrollSmoother } from "./utils/smoother";
 
 const TechStack = lazy(() => import("./TechStack"));
 
